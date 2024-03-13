@@ -3479,6 +3479,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-virtuoso@npm:^4.7.2":
+  version: 4.7.2
+  resolution: "react-virtuoso@npm:4.7.2"
+  peerDependencies:
+    react: ">=16 || >=17 || >= 18"
+    react-dom: ">=16 || >=17 || >= 18"
+  checksum: bc6ac8a901794e0ccd183eae073cc3ff422eca890666903b1eee45f27e6a0e2b7e4b9b0f1cf8232a70f5297fd99a3bb7b3be9ba433174d5bb1a038055719b7b8
+  languageName: node
+  linkType: hard
+
 "react-workshop-notes-app@workspace:.":
   version: 0.0.0-use.local
   resolution: "react-workshop-notes-app@workspace:."
@@ -3504,6 +3514,7 @@ __metadata:
     react-dom: ^18.2.0
     react-markdown: ^8.0.4
     react-redux: ^8.0.5
+    react-virtuoso: ^4.7.2
     redux: ^4.2.0
     remark-gfm: ^3.0.1
     text-readability: ^1.0.5

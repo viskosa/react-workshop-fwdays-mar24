@@ -15,13 +15,35 @@ const loadNotesFromLocalStorage = () => {
   return transformedNotes;
 };
 
+const parseCache = new Map();
+// → LRUMap for cache management
+// → or smth like https://www.npmjs.com/package/lru-memoize for even higher level of abstration:
+//    const memoizedParse = lruMemoize(1000)(parse);
+function parseCached(text, options) {
+  if (parseCache.has(text)) {
+    return parseCache.get(text);
+  }
+
+  const html = parse(text, options);
+  parseCache.set(text, html);
+
+  // Oldest cache eviction policy
+  if (parseCache.size > 1000) {
+    parseCache.delete(parseCache.keys().next().value);
+  }
+
+  return html;
+}
+
+//
+
 const saveNotesToLocalStorage = (notes) => {
   const transformedNotes = {};
   for (const [id, note] of Object.entries(notes)) {
     const transformedNote = {
       ...note,
       date: formatISO(note.date),
-      html: parse(note.text, { headerIds: false, mangle: false }),
+      html: parseCached(note.text, { headerIds: false, mangle: false }),
     };
     transformedNotes[id] = transformedNote;
   }
@@ -29,6 +51,48 @@ const saveNotesToLocalStorage = (notes) => {
   const stringifiedNotes = JSON.stringify(transformedNotes);
 
   localStorage.reactWorkshopAppNotes = stringifiedNotes;
+};
+
+// const saveNotesToLocalStorage = async (notes) => {
+//   const transformedNotes = {};
+
+//   let startTime = performance.now();
+//   await yieldToMainThread();
+//   for (const [id, note] of Object.entries(notes)) {
+//     const transformedNote = {
+//       ...note,
+//       date: formatISO(note.date),
+//       html: parse(note.text, { headerIds: false, mangle: false }),
+//     };
+//     transformedNotes[id] = transformedNote;
+//   }
+//   await yieldToMainThread();
+
+//   const stringifiedNotes = JSON.stringify(transformedNotes);
+
+//   await yieldToMainThread();
+
+//   localStorage.reactWorkshopAppNotes = stringifiedNotes;
+// };
+
+const yieldToMainThread = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 0);
+  });
+};
+
+// caching
+// debouncing
+// moving into web workers
+// splitting like in React
+
+const wrapWithConsoleTime = (fn) => {
+  return (...args) => {
+    console.time(fn.name);
+    const result = fn(...args);
+    console.timeEnd(fn.name);
+    return result;
+  };
 };
 
 export const getNotes = () => {

@@ -2,9 +2,18 @@ import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import { format } from "date-fns";
 import "./index.css";
-import { memo } from "react";
+import { memo, useEffect, useRef } from "react";
 
 function NoteButton({ isActive, id, onNoteActivated, text, filterText, date }) {
+  // useWhyDidYouUpdate("NoteButton", {
+  //   isActive,
+  //   id,
+  //   onNoteActivated,
+  //   text,
+  //   filterText,
+  //   date,
+  // });
+
   const className = [
     "notes-list__button",
     "notes-list__note",
@@ -21,6 +30,40 @@ function NoteButton({ isActive, id, onNoteActivated, text, filterText, date }) {
       {generateNoteHeader(text, filterText)}
     </button>
   );
+}
+
+// Get a mutable ref object where we can store props ...
+function useWhyDidYouUpdate(name, props) {
+  // ... for comparison next time this hook runs.
+  const previousProps = useRef();
+
+  useEffect(() => {
+    if (previousProps.current) {
+      // Get all keys from previous and current props
+      const allKeys = Object.keys({ ...previousProps.current, ...props });
+      // Use this object to keep track of changed props
+      const changesObj = {};
+      // Iterate through keys
+      allKeys.forEach((key) => {
+        // If previous is different from current
+        if (previousProps.current[key] !== props[key]) {
+          // Add to changesObj
+          changesObj[key] = {
+            from: previousProps.current[key],
+            to: props[key],
+          };
+        }
+      });
+
+      // If changesObj not empty then output to console
+      if (Object.keys(changesObj).length) {
+        console.log("[why-did-you-update]", name, changesObj);
+      }
+    }
+
+    // Finally update previousProps with current props for next hook call
+    previousProps.current = props;
+  });
 }
 
 function generateNoteHeader(text, filterText) {
@@ -75,5 +118,9 @@ function generateNoteHeader(text, filterText) {
     </ReactMarkdown>
   );
 }
+
+// virtualization ✅
+// throttling/debouncing
+// startTransition
 
 export default memo(NoteButton);
