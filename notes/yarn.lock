@@ -3497,6 +3497,7 @@ __metadata:
     redux: ^4.2.0
     remark-gfm: ^3.0.1
     text-readability: ^1.0.5
+    use-context-selector: ^1.4.4
     vite: ^4.0.4
   languageName: unknown
   linkType: soft
@@ -4122,6 +4123,23 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-context-selector@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "use-context-selector@npm:1.4.4"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: "*"
+    react-native: "*"
+    scheduler: ">=0.19.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: c1f891a41a6dfadecabf258343ff57ab6caa463ab2e4e38ace8ad72b7e8393e7895411e2edea9c3f9c30371eca096d922db7636414e8c894b8e10c93fa8ac1bd
   languageName: node
   linkType: hard
 

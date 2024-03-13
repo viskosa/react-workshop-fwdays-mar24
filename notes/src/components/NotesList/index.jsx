@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import FilterInput from "../FilterInput";
 import NoteButton from "../NoteButton";
@@ -33,47 +33,65 @@ function NotesList({
 
             return text.toLowerCase().includes(filter.toLowerCase());
           })
-          .map(({ id, text, date }) => (
-            <NoteButton
-              key={id}
-              isActive={activeNoteId === id}
-              onNoteActivated={() => onNoteActivated(id)}
-              text={text}
-              filterText={filter}
-              date={date}
-            />
-          ))}
+          .map(({ id, text, date }) => {
+            return (
+              <NoteButton
+                key={id}
+                isActive={activeNoteId === id}
+                id={id}
+                onNoteActivated={onNoteActivated}
+                text={text}
+                filterText={filter}
+                date={date}
+              />
+            );
+          })}
       </div>
 
       <div className="notes-list__controls">
-        <ButtonGroup size="small">
-          <Button
-            classes={{ root: "notes-list__control" }}
-            onClick={() => onNewNotesRequested({ count: 1, paragraphs: 1 })}
-          >
-            + Note
-          </Button>
-          <Button
-            classes={{ root: "notes-list__control" }}
-            onClick={() => onNewNotesRequested({ count: 1, paragraphs: 300 })}
-          >
-            + Huge
-          </Button>
-          <Button
-            classes={{ root: "notes-list__control" }}
-            onClick={() => onNewNotesRequested({ count: 100, paragraphs: 1 })}
-          >
-            + 100
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup size="small">
-          <Button
-            classes={{ root: "notes-list__control" }}
-            onClick={() => onDeleteAllRequested()}
-          >
-            Delete all
-          </Button>
-        </ButtonGroup>
+        {useMemo(
+          () => (
+            <>
+              <ButtonGroup size="small">
+                <>
+                  <Button
+                    classes={{ root: "notes-list__control" }}
+                    onClick={() =>
+                      onNewNotesRequested({ count: 1, paragraphs: 1 })
+                    }
+                  >
+                    + Note
+                  </Button>
+                  <Button
+                    classes={{ root: "notes-list__control" }}
+                    onClick={() =>
+                      onNewNotesRequested({ count: 1, paragraphs: 300 })
+                    }
+                  >
+                    + Huge
+                  </Button>
+                  <Button
+                    classes={{ root: "notes-list__control" }}
+                    onClick={() =>
+                      onNewNotesRequested({ count: 100, paragraphs: 1 })
+                    }
+                  >
+                    + 100
+                  </Button>
+                </>
+              </ButtonGroup>
+              <ButtonGroup size="small">
+                <Button
+                  classes={{ root: "notes-list__control" }}
+                  onClick={() => onDeleteAllRequested()}
+                >
+                  Delete all
+                </Button>
+              </ButtonGroup>
+            </>
+          ),
+          [onNewNotesRequested, onDeleteAllRequested]
+        )}
       </div>
     </div>
   );

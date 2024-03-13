@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createContext } from "use-context-selector";
 import "./index.css";
 
 export const DarkModeContext = createContext();
@@ -14,8 +15,11 @@ export function DarkModeProvider({ children }) {
     };
   }, [mode]);
 
+  const sunAngleToHorizon = Math.random() * 90;
+  // console.log("DarkModeProvider passes down the value:", value);
+
   return (
-    <DarkModeContext.Provider value={{ mode, setMode }}>
+    <DarkModeContext.Provider value={{ mode, sunAngleToHorizon, setMode }}>
       {children}
     </DarkModeContext.Provider>
   );
