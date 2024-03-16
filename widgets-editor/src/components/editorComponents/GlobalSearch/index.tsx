@@ -96,8 +96,11 @@ const GlobalSearch = () => {
   const defaultDocs = useDefaultDocumentationResults();
   const params = useParams<ExplorerURLParams>();
   const dispatch = useDispatch();
-  const toggleShow = () => dispatch(toggleShowGlobalSearchModal());
-  const [query, setQueryInState] = useState("");
+  const toggleShow = useCallback(
+    () => dispatch(toggleShowGlobalSearchModal()),
+    [],
+  );
+  const [query, setQueryInState] = useState(""); // ← hook 3
   const setQuery = useCallback((query: string) => {
     setQueryInState(query);
   }, []);
@@ -106,7 +109,8 @@ const GlobalSearch = () => {
   const [
     documentationSearchResults,
     setDocumentationSearchResultsInState,
-  ] = useState<Array<DocSearchItem>>([]);
+  ] = useState<Array<DocSearchItem>>([]); // ← this state changes unnecessarily (when the search results aren’t cached)
+  // console.log(documentationSearchResults);
 
   const setDocumentationSearchResults = useCallback((res) => {
     setDocumentationSearchResultsInState(res);

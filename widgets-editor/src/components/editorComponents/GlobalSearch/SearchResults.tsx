@@ -317,6 +317,8 @@ const SearchResults = ({
   searchResults: SearchItem[];
   query: string;
 }) => {
+  useWhyDidYouUpdate("SearchResults", { searchResults, query });
+
   return (
     <SearchResultsContainer>
       {searchResults.map((item: SearchItem, index: number) => (
@@ -329,6 +331,35 @@ const SearchResults = ({
       ))}
     </SearchResultsContainer>
   );
+};
+
+// log only clearly unnecessary renders
+// SearchResults.whyDidYouRender = true;
+// log all renders:
+SearchResults.whyDidYouRender = {
+  logOnDifferentValues: true,
+};
+
+export const useWhyDidYouUpdate = (name: string, props: any) => {
+  const previousProps = useRef<any>();
+  useEffect(() => {
+    if (previousProps.current) {
+      const keys = Object.keys({ ...previousProps.current, ...props });
+      const changes: any = {};
+      keys.forEach((key) => {
+        if (previousProps.current[key] !== props[key]) {
+          changes[key] = {
+            from: previousProps.current[key],
+            to: props[key],
+          };
+        }
+      });
+      if (Object.keys(changes).length) {
+        console.log("[why-did-you-update]", name, changes);
+      }
+    }
+    previousProps.current = props;
+  });
 };
 
 export default SearchResults;

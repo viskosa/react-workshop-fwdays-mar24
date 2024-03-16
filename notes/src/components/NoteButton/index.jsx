@@ -10,14 +10,29 @@ function NoteButton({ isActive, onNoteActivated, id, text, filterText, date }) {
   useLayoutEffect(() => {
     if (noteHeader.current) {
       if (noteHeader.current.scrollWidth > noteHeader.current.clientWidth) {
-        noteHeader.current.classList.add("notes-list__note-header_overflowing");
+        requestAnimationFrame(() => {
+          noteHeader.current.classList.add(
+            "notes-list__note-header_overflowing"
+          );
+        });
       } else {
-        noteHeader.current.classList.remove(
-          "notes-list__note-header_overflowing"
-        );
+        requestAnimationFrame(() => {
+          noteHeader.current.classList.remove(
+            "notes-list__note-header_overflowing"
+          );
+        });
       }
     }
   }, [text]);
+
+  // 1) avoid reads at all
+  // 2) groups reads and writes
+  // → refactoring to two components instead of one
+  // → use two useEffects
+  // → writing more canonical React
+  // → requestAnimationFrame → moves the code to the end of the current frame, before the browser updated the screen
+  //   or setTimeout(..., 0) → moves the code to the beginning of the next frame, after the browser updated the screen
+  // 3) switch to pure CSS
 
   const className = [
     "notes-list__button",
