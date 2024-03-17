@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo } from 'react'
+import React, { Fragment, Suspense, useEffect, useMemo } from 'react'
 import { DocumentTextIcon } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 
@@ -76,22 +76,24 @@ function Line({ onDelete, content }: LineProps) {
   }, [currentContent, onDelete])
 
   return (
-    <div className="my-0.5">
-      {currentContent.map((word, wordIndex) => {
-        return (
-          <Fragment key={word + wordIndex}>
-            <Word
-              onDelete={() => {
-                const newContent = [...currentContent]
-                newContent.splice(wordIndex, 1)
-                setCurrentContent(newContent)
-              }}
-              content={word}
-            />{' '}
-          </Fragment>
-        )
-      })}
-    </div>
+    <Suspense>
+      <div className="my-0.5">
+        {currentContent.map((word, wordIndex) => {
+          return (
+            <Fragment key={word + wordIndex}>
+              <Word
+                onDelete={() => {
+                  const newContent = [...currentContent]
+                  newContent.splice(wordIndex, 1)
+                  setCurrentContent(newContent)
+                }}
+                content={word}
+              />{' '}
+            </Fragment>
+          )
+        })}
+      </div>
+    </Suspense>
   )
 }
 

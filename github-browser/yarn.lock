@@ -12,6 +12,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.9.2":
+  version: 7.24.0
+  resolution: "@babel/runtime@npm:7.24.0"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/3495eed727bf4a4f84c35bb51ab53317ae38f4bbc3b1d0a8303751f9dfa0ce6f5fb2afced72b76c3dd0d8bb2ccb84787559a4dee9886291a36b26f02f0f759b4
+  languageName: node
+  linkType: hard
+
 "@headlessui/react@npm:^1.7.18":
   version: 1.7.18
   resolution: "@headlessui/react@npm:1.7.18"
@@ -902,6 +911,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.5.12"
     react: "npm:^18"
     react-dom: "npm:^18"
+    react-lazy-hydration: "npm:^0.1.0"
     tailwindcss: "npm:^3.3.0"
     typescript: "npm:^5"
     unzipper: "npm:^0.10.14"
@@ -1842,6 +1852,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-lazy-hydration@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "react-lazy-hydration@npm:0.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.9.2"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/d50840e29471f9e06c9749611a3346db492b7c5b131187df8bc7d272349c77f2bb29c3810f211db1e61c85c895ea2cbd051466d9deaf1e8160c791ede46c6589
+  languageName: node
+  linkType: hard
+
 "react@npm:^18":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
@@ -1881,6 +1902,13 @@ __metadata:
   dependencies:
     picomatch: "npm:^2.2.1"
   checksum: 10c0/6fa848cf63d1b82ab4e985f4cf72bd55b7dcfd8e0a376905804e48c3634b7e749170940ba77b32804d5fe93b3cc521aa95a8d7e7d725f830da6d93f3669ce66b
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 10c0/1b16eb2c4bceb1665c89de70dcb64126a22bc8eb958feef3cd68fe11ac6d2a4899b5cd1b80b0774c7c03591dc57d16631a7f69d2daa2ec98100e2f29f7ec4cc4
   languageName: node
   linkType: hard
 

@@ -1,3 +1,5 @@
+'use client'
+
 import { defaultRepo } from '@/consts'
 import { useRouter, useSearchParams } from 'next/navigation'
 

@@ -14,6 +14,11 @@ type CodeFileProps = {
   className?: string
 }
 
+// regular components: every file is used everywhere (on the client + on the server if you do SSR) → 'use client'
+// server-only components: render only on the server, send the rendered HTML to the client
+// → makes the bundle smaller
+// → makes hydration cheaper
+
 export function CodeFile({
   fileName,
   fileType,
@@ -22,9 +27,16 @@ export function CodeFile({
   className,
   selectedRepo,
 }: CodeFileProps) {
+  // The expensive part:
   const highlightedCode = useMemo(() => {
     return hljs.highlightAuto(content).value
   }, [content, fileType])
+  // 1) web worker
+  // 2) put to server and spend some time on request/response
+  // 3) useTransition → won’t work
+  // 4) lazy hydration
+  // 5) Suspense
+  // 6) Server Components
 
   const searchParams = new URLSearchParams()
   searchParams.set('selectedRepo', selectedRepo)
