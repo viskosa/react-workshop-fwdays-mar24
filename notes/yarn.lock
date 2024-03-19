@@ -2126,6 +2126,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immer@npm:^10.0.4":
+  version: 10.0.4
+  resolution: "immer@npm:10.0.4"
+  checksum: 10/c1196783cf18e836527f970e45dc88e5472756401831e94d494ca5fd00ab7b39de3156f50505908207e7efe59ac23244d2cde0bd0cff791de7e23709771757e6
+  languageName: node
+  linkType: hard
+
 "immer@npm:^9.0.16":
   version: 9.0.17
   resolution: "immer@npm:9.0.17"
@@ -3359,6 +3366,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-compare@npm:2.6.0":
+  version: 2.6.0
+  resolution: "proxy-compare@npm:2.6.0"
+  checksum: 10/c7fc9e50873f01bd79bf68ed861f740891d6c590332954b9522479a5c7d598a62225fdfa8a42460d9be5bc7a78c28377839d9d06fbced26cae62332c4410b81a
+  languageName: node
+  linkType: hard
+
+"proxy-memoize@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "proxy-memoize@npm:2.0.5"
+  dependencies:
+    proxy-compare: "npm:2.6.0"
+  checksum: 10/be1da21f33e7e017944243457a18381769a474049c9bb3bd5165295d9e405d7f213d9189c8625bacaa25168c45574b95d2db7c89a45f4817bb8b734d45f8be0b
+  languageName: node
+  linkType: hard
+
 "punycode@npm:^2.1.0":
   version: 2.3.0
   resolution: "punycode@npm:2.3.0"
@@ -3494,12 +3517,14 @@ __metadata:
     date-fns: "npm:^2.29.3"
     eslint: "npm:^8.43.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
+    immer: "npm:^10.0.4"
     jabber: "npm:^1.5.2"
     lodash: "npm:^4.17.21"
     marked: "npm:^12.0.1"
     mobx: "npm:^6.7.0"
     mobx-react-lite: "npm:^3.4.0"
     nanoid: "npm:^4.0.0"
+    proxy-memoize: "npm:^2.0.5"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-markdown: "npm:^8.0.4"
