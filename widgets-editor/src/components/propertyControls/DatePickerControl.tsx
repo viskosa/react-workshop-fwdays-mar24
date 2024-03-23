@@ -1,6 +1,6 @@
 import React from "react";
 import BaseControl, { ControlProps } from "./BaseControl";
-import moment from "moment-timezone";
+import moment from "moment";
 import styled from "styled-components";
 import { TimePrecision } from "@blueprintjs/datetime";
 import { WidgetProps } from "widgets/BaseWidget";

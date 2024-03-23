@@ -12,21 +12,35 @@ export interface CustomFusionChartConfig {
   dataSource?: any;
 }
 
-const FusionCharts = require("fusioncharts");
+import FusionCharts from "fusioncharts";
+import Charts from "fusioncharts/fusioncharts.charts";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import Widgets from "fusioncharts/fusioncharts.widgets";
+import ZoomScatter from "fusioncharts/fusioncharts.zoomscatter";
+import ZoomLine from "fusioncharts/fusioncharts.zoomline";
+import PowerCharts from "fusioncharts/fusioncharts.powercharts";
+import TimeSeries from "fusioncharts/fusioncharts.timeseries";
+import OverlappedColumn from "fusioncharts/fusioncharts.overlappedcolumn2d";
+import OverlappedBar from "fusioncharts/fusioncharts.overlappedbar2d";
+import TreeMap from "fusioncharts/fusioncharts.treemap";
+import Maps from "fusioncharts/fusioncharts.maps";
+import Gantt from "fusioncharts/fusioncharts.gantt";
+import VML from "fusioncharts/fusioncharts.vml";
+
 const plugins: Record<string, any> = {
-  Charts: require("fusioncharts/fusioncharts.charts"),
-  FusionTheme: require("fusioncharts/themes/fusioncharts.theme.fusion"),
-  Widgets: require("fusioncharts/fusioncharts.widgets"),
-  ZoomScatter: require("fusioncharts/fusioncharts.zoomscatter"),
-  ZoomLine: require("fusioncharts/fusioncharts.zoomline"),
-  PowerCharts: require("fusioncharts/fusioncharts.powercharts"),
-  TimeSeries: require("fusioncharts/fusioncharts.timeseries"),
-  OverlappedColumn: require("fusioncharts/fusioncharts.overlappedcolumn2d"),
-  OverlappedBar: require("fusioncharts/fusioncharts.overlappedbar2d"),
-  TreeMap: require("fusioncharts/fusioncharts.treemap"),
-  Maps: require("fusioncharts/fusioncharts.maps"),
-  Gantt: require("fusioncharts/fusioncharts.gantt"),
-  VML: require("fusioncharts/fusioncharts.vml"),
+  Charts,
+  FusionTheme,
+  Widgets,
+  ZoomScatter,
+  ZoomLine,
+  PowerCharts,
+  TimeSeries,
+  OverlappedColumn,
+  OverlappedBar,
+  TreeMap,
+  Maps,
+  Gantt,
+  VML,
 };
 
 // Enable all plugins.

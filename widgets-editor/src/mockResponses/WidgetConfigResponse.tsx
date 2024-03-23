@@ -1,6 +1,6 @@
 import { WidgetConfigReducerState } from "reducers/entityReducers/widgetConfigReducer";
 import { WidgetProps } from "widgets/BaseWidget";
-import moment from "moment-timezone";
+import moment from "moment";
 import { generateReactKey } from "utils/generators";
 import { FileDataTypes } from "widgets/FilepickerWidget";
 import { Colors } from "constants/Colors";

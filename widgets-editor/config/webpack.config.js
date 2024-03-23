@@ -11,6 +11,8 @@ const safePostCssParser = require("postcss-safe-parser");
 const paths = require("./paths");
 const modules = require("./modules");
 const getClientEnvironment = require("./env");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const StatoscopeWebpackPlugin = require("@statoscope/webpack-plugin").default;
 
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
@@ -75,7 +77,8 @@ module.exports = function(webpackEnv) {
     mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvProduction ? "source-map" : "cheap-module-source-map",
+    // devtool: isEnvProduction ? "source-map" : "cheap-module-source-map",
+    devtool: false,
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: isEnvProduction
@@ -103,6 +106,7 @@ module.exports = function(webpackEnv) {
       hashFunction: "xxhash64",
     },
     optimization: {
+      concatenateModules: false,
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
@@ -161,6 +165,9 @@ module.exports = function(webpackEnv) {
           "react-dom$": "react-dom/profiling",
           "scheduler/tracing": "scheduler/tracing-profiling",
         }),
+        [require.resolve(
+          "@blueprintjs/icons/lib/esm/generated-icons/16px/paths/index.js",
+        )]: require.resolve("./iconBarrelMock.js"),
       },
     },
     module: {
@@ -277,6 +284,12 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        reportFilename: "report.html",
+        openAnalyzer: false,
+      }),
+      new StatoscopeWebpackPlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -326,3 +339,9 @@ module.exports = function(webpackEnv) {
     performance: false,
   };
 };
+
+// 1) alias 20px to smth if we don’t use that
+// 2) remove icons from the bundle → dunno how, sorry
+// 3) remove icons (or other code) from the library before it gets to bundling
+// google for “[library name] bundle size” and check for existing solutions
+// check if there are updates to the library → maybe they’ve already fixed the issue

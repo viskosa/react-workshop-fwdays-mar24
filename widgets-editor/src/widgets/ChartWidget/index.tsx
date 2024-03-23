@@ -14,7 +14,7 @@ import { CustomFusionChartConfig } from "components/designSystems/appsmith/Chart
 const ChartComponent = lazy(() =>
   retryPromise(() =>
     import(
-      /* webpackPrefetch: true, webpackChunkName: "charts" */ "components/designSystems/appsmith/ChartComponent"
+      /* webpackPrefetch: true */ "components/designSystems/appsmith/ChartComponent"
     ),
   ),
 );

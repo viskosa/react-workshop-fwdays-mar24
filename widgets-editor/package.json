@@ -11,7 +11,6 @@
     "@blueprintjs/datetime": "^4.4.10",
     "@blueprintjs/icons": "^4.12.1",
     "@blueprintjs/select": "^4.8.14",
-    "@blueprintjs/timezone": "^4.5.14",
     "@fusioncharts/powercharts": "^3.19.0",
     "@github/g-emoji-element": "^1.1.5",
     "@manaflair/redux-batch": "^1.0.0",
@@ -20,6 +19,7 @@
     "@sentry/react": "^6.19.7",
     "@sentry/tracing": "^6.19.7",
     "@sentry/webpack-plugin": "^1.20.0",
+    "@statoscope/webpack-plugin": "^5.28.2",
     "@svgr/webpack": "6.5.1",
     "@uppy/core": "^1.20.1",
     "@uppy/dashboard": "^1.21.1",
@@ -88,6 +88,7 @@
     "path-to-regexp": "^6.2.1",
     "popper.js": "^1.16.1",
     "postcss-safe-parser": "6.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "^1.19.1",
     "prismjs": "^1.29.0",
     "prompts": "2.4.2",
@@ -144,6 +145,7 @@
     "unescape-js": "^1.1.4",
     "url-search-params-polyfill": "^8.1.1",
     "webpack": "5.75.0",
+    "webpack-bundle-analyzer": "^4.10.1",
     "webpack-dev-server": "4.11.1",
     "webpack-stats-plugin": "^1.1.1",
     "worker-loader": "^3.0.8"
@@ -212,6 +214,7 @@
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "patch-package": "^8.0.0",
     "raw-loader": "^4.0.2",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-is": "^18.2.0",
@@ -282,5 +285,8 @@
       "react-app"
     ]
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "resolutions": {
+    "@blueprintjs/icons@4.12.1": "patch:@blueprintjs/icons@npm:4.12.1#.yarn/patches/@blueprintjs-icons-npm-4.12.1-f9cf32419a.patch"
+  }
 }

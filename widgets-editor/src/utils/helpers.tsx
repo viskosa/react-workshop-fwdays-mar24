@@ -1,7 +1,4 @@
 import { GridDefaults } from "constants/WidgetConstants";
-import lottie from "lottie-web";
-import confetti from "assets/lottie/binding.json";
-import successAnimation from "assets/lottie/success-animation.json";
 import {
   DATA_TREE_KEYWORDS,
   JAVASCRIPT_KEYWORDS,
@@ -206,18 +203,26 @@ export const isString = (str: any) => {
   return typeof str === "string" || str instanceof String;
 };
 
-export const playOnboardingAnimation = () => {
+export const playOnboardingAnimation = async () => {
+  const confetti = (
+    await import(/* webpackChunkName: "lottie" */ "assets/lottie/confetti.json")
+  ).default;
   playLottieAnimation("#root", confetti);
 };
 
-export const playOnboardingStepCompletionAnimation = () => {
+export const playOnboardingStepCompletionAnimation = async () => {
+  const successAnimation = (
+    await import(
+      /* webpackChunkName: "lottie" */ "assets/lottie/success-animation.json"
+    )
+  ).default;
   playLottieAnimation(".onboarding-step-indicator", successAnimation, {
     "background-color": "white",
     padding: "60px",
   });
 };
 
-const playLottieAnimation = (
+const playLottieAnimation = async (
   selector: string,
   animation: any,
   styles?: any,
@@ -240,6 +245,9 @@ const playLottieAnimation = (
 
   container.appendChild(el);
 
+  const lottie = (
+    await import(/* webpackChunkName: "lottie" */ "lottie-web/lib/my-file")
+  ).default;
   const animObj = lottie.loadAnimation({
     container: el,
     animationData: animation,

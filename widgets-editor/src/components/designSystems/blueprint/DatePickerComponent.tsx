@@ -8,7 +8,7 @@ import {
 import { ControlGroup, Classes, Label } from "@blueprintjs/core";
 import { ComponentProps } from "components/designSystems/appsmith/BaseComponent";
 import { DateInput } from "@blueprintjs/datetime";
-import moment from "moment-timezone";
+import moment from "moment";
 import "../../../../node_modules/@blueprintjs/datetime/lib/css/blueprint-datetime.css";
 import { DatePickerType } from "widgets/DatePickerWidget";
 import { WIDGET_PADDING } from "constants/WidgetConstants";
@@ -91,6 +91,8 @@ class DatePickerComponent extends React.Component<
     const _date = moment(date, format);
     return _date.isValid() ? _date.toDate() : undefined;
   };
+  // work with dates without moment: new Date(), date-fns, etc.
+  //
 
   render() {
     const now = moment();
