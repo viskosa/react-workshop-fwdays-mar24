@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import { memo } from 'react';
 
 function FilterInput({ filter, onChange, noteCount }) {
   return (
@@ -12,4 +13,7 @@ function FilterInput({ filter, onChange, noteCount }) {
     />
   );
 }
-export default FilterInput;
+
+// memo will preserve FilterInput component from rendering
+// if prev props and current props are equal
+export default memo(FilterInput);
