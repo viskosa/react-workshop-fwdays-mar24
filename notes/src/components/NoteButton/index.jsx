@@ -4,7 +4,14 @@ import { format } from "date-fns";
 import "./index.css";
 import { memo } from "react";
 
+// custom hook that takes the name of component and the fields that we want to observe
+// and show the reason why the component was updated
+import { useWhyDidYouUpdate } from "../../utils/useWhyDidYouUpdate";
+
 function NoteButton({ isActive, id, onNoteActivated, text, filterText, date }) {
+  // we're going to wath isActive, id, onNoteActivated, text, filterText, date fields
+  // useWhyDidYouUpdate("NoteButton", { isActive, id, onNoteActivated, text, filterText, date })
+
   const className = [
     "notes-list__button",
     "notes-list__note",
