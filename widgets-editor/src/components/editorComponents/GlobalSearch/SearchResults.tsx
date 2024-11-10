@@ -331,4 +331,13 @@ const SearchResults = ({
   );
 };
 
+// 2 ways to turn on whyDidYouRender:
+// 1 - log only clearly unnecessary renders:
+// SearchResults.whyDidYouRender = true;
+
+// 2 - log all renders:
+SearchResults.whyDidYouRender = {
+  logOnDifferentValues: true,
+};
+
 export default SearchResults;
