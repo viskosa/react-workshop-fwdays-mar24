@@ -9,12 +9,33 @@ function NoteButton({ isActive, onNoteActivated, id, text, filterText, date }) {
 
   useLayoutEffect(() => {
     if (noteHeader.current) {
-      if (noteHeader.current.scrollWidth > noteHeader.current.clientWidth) {
-        noteHeader.current.classList.add("notes-list__note-header_overflowing");
+      // here we have layout thrashing:
+      // it checks the width of note header and if it doesn't fit the width of note, it will add shadow to the right
+      if (noteHeader.current.scrollWidth > noteHeader.current.clientWidth) { // read from the DOM
+        // we're going to delay writes to the layout to the end of the frame
+        // noteHeader.current.classList.add("notes-list__note-header_overflowing"); // write to the DOM
+        // 1 - requestAnimationFrame is going to move animation to the end of the current task(frame) - prefferable solution
+        requestAnimationFrame(() => {
+          noteHeader.current.classList.add("notes-list__note-header_overflowing");
+        })
+        // 2 - setTimeout is going to move animation at the beginning of the next frame
+        // setTimeout(() => {
+        //   noteHeader.current.classList.add("notes-list__note-header_overflowing");
+        // }, 0)
       } else {
-        noteHeader.current.classList.remove(
-          "notes-list__note-header_overflowing"
-        );
+        // noteHeader.current.classList.remove(
+        //   "notes-list__note-header_overflowing"
+        // );
+        requestAnimationFrame(() => {
+          noteHeader.current.classList.remove(
+            "notes-list__note-header_overflowing"
+          );
+        })
+        // setTimeout(() => {
+        //   noteHeader.current.classList.remove(
+        //     "notes-list__note-header_overflowing"
+        //   );
+        // }, 0)
       }
     }
   }, [text]);
